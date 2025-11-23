@@ -1,1 +1,1 @@
-addChategories = ["cloathes"]
+addCategories = ["cloathes"]

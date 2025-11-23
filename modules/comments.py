@@ -1,7 +1,4 @@
 
-
-
-
 # MENU
 def menu():
     print("===========MENU===========")

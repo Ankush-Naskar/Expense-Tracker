@@ -1,59 +1,70 @@
 import os
-from user import addChategories
-from modules.coments import menu, total_menu
+from user import addCategories
+from modules.comments import menu, total_menu
 from modules.add_expense import Input, save_as_xl
+from modules import total_expense
 
 
-chategories = ["Grocery", "Food", "Gadget", "Others"]
-chategories.extend(addChategories)
-
+categories = ["Grocery", "Food", "Gadget", "Others"]
+categories.extend(addCategories)
 
 try:
+
     while True:
         menu()
-        choice = int(input("Enter your Choice : "))
+        try:
+            choice = int(input("Enter your Choice: "))
+        except ValueError:
+            print("Please enter a valid number.")
+            continue
 
-    # Add Expense
-        if choice==1:
-            expense = Input(chategories)
+
+        # Add Expense
+        if (choice == 1):
+            expense = Input(categories)
             save_as_xl(expense)
 
-            print("Expenses added succesfully")
+            print("Expenses added: ")
 
         
 
-    # View Expense
+        # View Expense
         elif(choice == 2):
             excel_file = r"D:\my projects\price_tracker\expenses.xlsx"
             os.startfile(excel_file)
 
 
-    # View Total Amount
+        # View Total Amount
         elif(choice == 3):
-            from modules import total_expense
-           
+            
             total_menu()
-            choice = int(input("Enter your Choice : "))
+            try:
+                sub_choice = int(input("Enter your Choice : "))
+            except ValueError:
+                print("Please enter a valid number.")
+                continue
 
-            if choice == 1:
+            if sub_choice == 1:
                 total_expense.get_todays_expense()
-            elif choice == 2:
+            elif sub_choice == 2:
                 total_expense.get_daily_summary()
-            elif choice == 3:
+            elif sub_choice == 3:
                 total_expense.get_monthly_summary()
-            elif choice == 4:
+            elif sub_choice == 4:
                 total_expense.get_yearly_summary()
             else:
                 
                 print("Invalid choice....")
+                continue
 
-    # Exit
+        # Exit
         elif(choice == 4):
             break
 
-    # Other
+        # Other
         else:
             print("Invalid choice....")
+            continue
 
 except Exception as e:
-    print("error ocurs\n", e)
+    print("Error occurred: ", e)
