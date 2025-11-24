@@ -1,5 +1,5 @@
 import os
-from user import addCategories
+from user_settings import addCategories
 from modules.comments import menu, total_menu
 from modules.add_expense import Input, save_as_xl
 from modules import total_expense
