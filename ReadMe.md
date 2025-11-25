@@ -60,10 +60,21 @@ EXPENSE-TRACKER can generate clear spending summaries based on the user’s pref
 
 
 ## 👤 USER SETTINGS
-`user_settings.py` file defines the default expense categories used by EXPENSE-TRACKER. You can customize or expand the list based on your needs:
+- `addCategories` in `user_settings.py` file defines the default expense categories used by EXPENSE-TRACKER. You can customize or expand the list based on your needs:
 ```python
 addCategories = ["clothes", "utilities", "entertainment"]
+```  
+- You can customize the Excel file name by setting the `file_name` variable:
+```python
+file_name = "expenses"
 ```
+By default, the file will be named `expenses.xlsx`. You can change this to create and manage multiple files—just assign a different name and use it consistently when adding or accessing data.
+
+All file paths in the program use this format:
+```python
+"D:\my projects\price_tracker\{file_name}.xlsx"
+```
+Make sure the file name matches exactly when switching between different expense files.
 
 ## 🔐 PRIVACY NOTICE
 All expense data is stored locally in a `.xlsx` file. Nothing is uploaded, synced, or shared online. Users are fully responsible for managing, securing, and backing up their own data.

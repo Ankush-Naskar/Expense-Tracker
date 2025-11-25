@@ -1,5 +1,5 @@
 import os
-from user_settings import addCategories
+from user_settings import addCategories, file_name
 from modules.comments import menu, total_menu
 from modules.add_expense import Input, save_as_xl
 from modules import total_expense
@@ -30,7 +30,7 @@ try:
 
         # View Expense
         elif(choice == 2):
-            excel_file = r"D:\my projects\price_tracker\expenses.xlsx"
+            excel_file = rf"D:\my projects\price_tracker\{file_name}.xlsx"
             os.startfile(excel_file)
 
 

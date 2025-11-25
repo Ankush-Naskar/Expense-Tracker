@@ -1,9 +1,11 @@
 import pandas as pd
 from datetime import datetime
+from user_settings import file_name
+
 
 def load_data():
     try:
-        df = pd.read_excel("D:/my projects/price_tracker/expenses.xlsx")
+        df = pd.read_excel(f"D:/my projects/price_tracker/{file_name}.xlsx")
         df["Date"] = pd.to_datetime(df["Date"], format="%d-%m-%Y")
         return df
     except Exception as e:

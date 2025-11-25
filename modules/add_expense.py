@@ -1,6 +1,7 @@
 import pandas as pd
 from openpyxl import load_workbook
 from datetime import datetime
+from user_settings import file_name
 
 
 # === MODULE FOR INPUT ===
@@ -52,7 +53,7 @@ def Input(categories):
 def save_as_xl(expense):
     df = pd.DataFrame(expense)
 
-    excel_file = r"D:\my projects\price_tracker\expenses.xlsx"
+    excel_file = rf"D:\my projects\price_tracker\{file_name}.xlsx"
     try:
         book = load_workbook(excel_file)
         with pd.ExcelWriter(excel_file, engine="openpyxl", mode="a", if_sheet_exists="overlay") as writer:
