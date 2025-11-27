@@ -14,7 +14,7 @@ EXPENSE-TRACKER is a lightweight expense management tool built in Python. It hel
 ## 💡 HOW IT WORKS
 - The user selects a category, enters a product name and amount.
 - The system automatically adds the current date and saves the entry to an Excel file.
-- Summary functions analyze the data and display total expenses by day, month, or year.
+- Summary functions analyze the data and display total expenses by day, week, month, or year.
 - All inputs are validated to prevent crashes or incorrect entries.
 
 ## ✨ FEATURES
@@ -28,7 +28,7 @@ EXPENSE-TRACKER is a lightweight expense management tool built in Python. It hel
 Every entry is automatically saved with the current date — users cannot manually select or enter a custom date within EXPENSE-TRACKER. If needed, the date can be edited later directly from the generated `.xlsx` file. To avoid calculation errors in date-based summaries, the format must remain `DD-MM-YYYY`.
 
 ### 📊 Summaries
-EXPENSE-TRACKER can generate clear spending summaries based on the user’s preference — including daily, monthly, and yearly expense reports. This helps users easily understand their spending patterns and manage their finances better.
+EXPENSE-TRACKER can generate clear spending summaries based on the user’s preference — including daily, weekly, monthly, and yearly expense reports. This helps users easily understand their spending patterns and manage their finances better.
 
 ## 📁 FILE STRUCTURE
 ```
@@ -51,7 +51,7 @@ EXPENSE-TRACKER can generate clear spending summaries based on the user’s pref
 |  |             Handles input and Excel saving 
 |  |
 │  ├── 📄 total_expense.py 
-|  |             Reporting functions (today, daily, monthly, yearly) 
+|  |             Reporting functions (today, weekly, daily, monthly, yearly) 
 |  |
 └──└── 📄 comments.py 
                 Menu display functions 

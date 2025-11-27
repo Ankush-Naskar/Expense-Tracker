@@ -1,6 +1,10 @@
 import os
+from modules.comments import menu, total_menu, get_default_config_text
+if not os.path.exists("user_settings.py"):
+    with open("user_settings.py", "w") as f:
+        f.write(get_default_config_text())
+
 from user_settings import addCategories, file_name
-from modules.comments import menu, total_menu
 from modules.add_expense import Input, save_as_xl
 from modules import total_expense
 
@@ -44,18 +48,20 @@ try:
                 print("Please enter a valid number.")
                 continue
 
-            if sub_choice == 1:
-                total_expense.get_todays_expense()
-            elif sub_choice == 2:
-                total_expense.get_daily_summary()
-            elif sub_choice == 3:
-                total_expense.get_monthly_summary()
-            elif sub_choice == 4:
-                total_expense.get_yearly_summary()
-            else:
-                
-                print("Invalid choice....")
-                continue
+            match sub_choice:
+                case 1:
+                    total_expense.get_todays_expense()
+                case 2:
+                    total_expense.get_daily_summary()
+                case 3:
+                    total_expense.get_last_8_weeks_summary()
+                case 4:
+                    total_expense.get_monthly_summary()
+                case 5:
+                    total_expense.get_yearly_summary()
+                case _:
+                    print("Invalid choice....")
+                    continue
 
         # Exit
         elif(choice == 4):

@@ -1,5 +1,5 @@
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, timedelta
 from user_settings import file_name
 
 
@@ -25,25 +25,52 @@ def get_todays_expense():
 # Daily Summary
 def get_daily_summary():
     df = load_data()
-    if df is None: 
-        return
-    daily_total = df.groupby(df["Date"].dt.date)["Amount"].sum()
+    if df is None: return
 
-    print("📅 Daily Expense Summary:")
+    cutoff_date = pd.Timestamp.now() - pd.Timedelta(days=365)
+    recent_data = df[df["Date"] >= cutoff_date]
+
+    daily_total = recent_data.groupby(recent_data["Date"].dt.date)["Amount"].sum()
+
+    print(f"📅 Daily Expense Summary:")
+
     for day, amount in daily_total.items():
         print(f"{day.strftime('%d-%m-%Y')}: ₹{amount}")
+        
+# weekly summary 
+def get_last_8_weeks_summary():
+    df = load_data()
+    if df is None: return
+
+    cutoff = pd.Timestamp.now() - pd.DateOffset(weeks=8)
+    recent = df[df["Date"] >= cutoff]
+    weekly_groups = recent.groupby(recent["Date"].dt.to_period("W"))["Amount"].sum()
+
+    print(f"📅 Weekly Summary: ")
+    
+    for week, amount in weekly_groups.items():
+        start = week.start_time.strftime('%d-%m')
+        end = week.end_time.strftime('%d-%m')
+        
+        print(f"({start} to {end}) - ₹{amount}")
+        
 
 # Monthly Summary
 def get_monthly_summary():
     df = load_data()
-    if df is None: 
-        return
-    monthly_total = df.groupby(df["Date"].dt.to_period("M"))["Amount"].sum()
+    if df is None: return
 
-    print("📅 Monthly Expense Summary:")
+    cutoff_date = pd.Timestamp.now() - pd.DateOffset(months=12)
+    recent_data = df[df["Date"] >= cutoff_date]
+
+    monthly_total = recent_data.groupby(recent_data["Date"].dt.to_period("M"))["Amount"].sum()
+
+    print("📅 Monthly Expense Summary (Last 12 Months):")
+    
     for period, amount in monthly_total.items():
         month_name = period.strftime("%B %Y")
         print(f"{month_name:<15} ₹{amount}")
+        
 
 # yearly total
 def get_yearly_summary():
@@ -56,5 +83,3 @@ def get_yearly_summary():
     for year, amount in yearly_total.items():
         print(f"{year}: ₹{amount}")
 
-# except Exception as e:
-#     print("error!")
