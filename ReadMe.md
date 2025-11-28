@@ -25,7 +25,7 @@ EXPENSE-TRACKER is a lightweight expense management tool built in Python. It hel
 
 
 ### 📅 Auto-date
-Every entry is automatically saved with the current date — users cannot manually select or enter a custom date within EXPENSE-TRACKER. If needed, the date can be edited later directly from the generated `.xlsx` file. To avoid calculation errors in date-based summaries, the format must remain `DD-MM-YYYY`.
+Every entry is automatically saved with the current date. Users cannot manually select or enter a custom date within EXPENSE-TRACKER. If needed, the date can be edited later directly from the generated `.xlsx` file. To avoid calculation errors in date-based summaries, the format must remain `DD-MM-YYYY`.
 
 ### 📊 Summaries
 EXPENSE-TRACKER can generate clear spending summaries based on the user’s preference — including daily, weekly, monthly, and yearly expense reports. This helps users easily understand their spending patterns and manage their finances better.
@@ -48,10 +48,13 @@ EXPENSE-TRACKER can generate clear spending summaries based on the user’s pref
 ├── 📁 modules/ 
 |  |
 │  ├── 📄 add_expense.py 
-|  |             Handles input and Excel saving 
+|  |             Handles Excel saving
+|  |
+│  ├── 📄 input_function.py
+|  |              Handles input functions
 |  |
 │  ├── 📄 total_expense.py 
-|  |             Reporting functions (today, weekly, daily, monthly, yearly) 
+|  |             Reporting functions (today, daily, weekly, monthly, yearly) 
 |  |
 └──└── 📄 comments.py 
                 Menu display functions 
@@ -72,7 +75,7 @@ By default, the file will be named `expenses.xlsx`. You can change this to creat
 
 All file paths in the program use this format:
 ```python
-"D:\my projects\price_tracker\{file_name}.xlsx"
+"{file_name}.xlsx"
 ```
 Make sure the file name matches exactly when switching between different expense files.
 
@@ -80,15 +83,18 @@ Make sure the file name matches exactly when switching between different expense
 All expense data is stored locally in a `.xlsx` file. Nothing is uploaded, synced, or shared online. Users are fully responsible for managing, securing, and backing up their own data.
 
 ## ⚙️ INSTALLATION
-If user want to create a virtual environment
+Download and install [vs code](https://code.visualstudio.com/Download) and [python](https://www.python.org/ftp/python/3.14.0/python-3.14.0-amd64.exe) from your browser.  
+Open vs code and install python extension:
+
+1. If user want to create a virtual environment:
+
 ```python
 pip install virtualenv          # Install virtualenv
 python -m venv env              # Create a virtual environment
 .\env\Scripts\activate.ps1      # Activate the environment (Windows PowerShell)
 pip install -r requirements.txt # Install required modules
-
 ```
- If user don't want to create environment
+2. If user don't want to create environment  
  ```python
 pip install -r requirements.txt # Install required modules
  ```

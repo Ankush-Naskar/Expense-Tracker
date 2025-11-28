@@ -5,8 +5,8 @@ if not os.path.exists("user_settings.py"):
         f.write(get_default_config_text())
 
 from user_settings import addCategories, file_name
-from modules.add_expense import Input, save_as_xl
-from modules import total_expense
+from modules.add_expense import save_as_xl
+from modules.input_function import input_for_add, input_for_total_amount
 
 
 categories = ["Grocery", "Food", "Gadget", "Others"]
@@ -19,58 +19,38 @@ try:
         try:
             choice = int(input("Enter your Choice: "))
         except ValueError:
-            print("Please enter a valid number.")
+            print("⚠️  Please enter a valid number.")
             continue
 
+        match choice:
 
-        # Add Expense
-        if (choice == 1):
-            expense = Input(categories)
-            save_as_xl(expense)
+            # =====  1. Add Expense  =====
+            case 1:
+                while True:
+                    expense = input_for_add(categories)
+                    save_as_xl(expense)
+                    again_run = input("\nAdd another expense? (y/n): ").lower()
+                    if not again_run == "y" :
+                        break
 
-            print("Expenses added: ")
+            # =====  2. View Expense  =====
+            case 2:
+                excel_file = f"{file_name}.xlsx"
+                os.startfile(excel_file)
 
-        
+            # =====  3. View Total Amount  =====
+            case 3:
+                # total_menu()
+                input_for_total_amount()
 
-        # View Expense
-        elif(choice == 2):
-            excel_file = rf"D:\my projects\price_tracker\{file_name}.xlsx"
-            os.startfile(excel_file)
+            # =====  4. Exit  =====
+            case 4:
+                break
 
-
-        # View Total Amount
-        elif(choice == 3):
-            
-            total_menu()
-            try:
-                sub_choice = int(input("Enter your Choice : "))
-            except ValueError:
-                print("Please enter a valid number.")
+            # =====  Other  =====
+            case _:
+                print("⚠️  Invalid choice....")
                 continue
 
-            match sub_choice:
-                case 1:
-                    total_expense.get_todays_expense()
-                case 2:
-                    total_expense.get_daily_summary()
-                case 3:
-                    total_expense.get_last_8_weeks_summary()
-                case 4:
-                    total_expense.get_monthly_summary()
-                case 5:
-                    total_expense.get_yearly_summary()
-                case _:
-                    print("Invalid choice....")
-                    continue
-
-        # Exit
-        elif(choice == 4):
-            break
-
-        # Other
-        else:
-            print("Invalid choice....")
-            continue
-
 except Exception as e:
-    print("Error occurred: ", e)
+    print("❌ Error occurred: ", e)

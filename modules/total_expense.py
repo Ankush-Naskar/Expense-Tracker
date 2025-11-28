@@ -5,7 +5,7 @@ from user_settings import file_name
 
 def load_data():
     try:
-        df = pd.read_excel(f"D:/my projects/price_tracker/{file_name}.xlsx")
+        df = pd.read_excel(f"{file_name}.xlsx")
         df["Date"] = pd.to_datetime(df["Date"], format="%d-%m-%Y")
         return df
     except Exception as e:
@@ -20,7 +20,7 @@ def get_todays_expense():
         return
     today = datetime.now().date()  # get today's date
     todays_total = df.loc[df["Date"].dt.date == today, "Amount"].sum()
-    print(f"💰 Today's Expense ({today.strftime('%d-%m-%Y')}): ₹{todays_total}")
+    print(f"\n💰 Today's Expense ({today.strftime('%d-%m-%Y')}): ₹{todays_total}")
 
 # Daily Summary
 def get_daily_summary():
@@ -32,7 +32,7 @@ def get_daily_summary():
 
     daily_total = recent_data.groupby(recent_data["Date"].dt.date)["Amount"].sum()
 
-    print(f"📅 Daily Expense Summary:")
+    print(f"\n📅 Daily Expense Summary:")
 
     for day, amount in daily_total.items():
         print(f"{day.strftime('%d-%m-%Y')}: ₹{amount}")
@@ -46,7 +46,7 @@ def get_last_8_weeks_summary():
     recent = df[df["Date"] >= cutoff]
     weekly_groups = recent.groupby(recent["Date"].dt.to_period("W"))["Amount"].sum()
 
-    print(f"📅 Weekly Summary: ")
+    print(f"\n📅 Weekly Summary: ")
     
     for week, amount in weekly_groups.items():
         start = week.start_time.strftime('%d-%m')
@@ -65,7 +65,7 @@ def get_monthly_summary():
 
     monthly_total = recent_data.groupby(recent_data["Date"].dt.to_period("M"))["Amount"].sum()
 
-    print("📅 Monthly Expense Summary (Last 12 Months):")
+    print("\n📅 Monthly Expense Summary (Last 12 Months):")
     
     for period, amount in monthly_total.items():
         month_name = period.strftime("%B %Y")
@@ -79,7 +79,7 @@ def get_yearly_summary():
         return
     yearly_total = df.groupby(df["Date"].dt.year)["Amount"].sum()
 
-    print("📅 Yearly Expense Summary:")
+    print("\n📅 Yearly Expense Summary:")
     for year, amount in yearly_total.items():
         print(f"{year}: ₹{amount}")
 

@@ -1,65 +1,28 @@
+import os
 import pandas as pd
-from openpyxl import load_workbook
-from datetime import datetime
 from user_settings import file_name
 
 
-# === MODULE FOR INPUT ===
-def Input(categories):
-
-    i = 1
-    category_list = []
-    for element in categories:
-        category_list.append(f"{i}. {element}")
-        i += 1
-
-    #  === INPUT CATEGORY ===
-    try:
-        category_index = int(input(f"Enter category NO. - {category_list} : "))
-        if category_index < 1 or category_index > len(categories):
-            print("\nCategory number out of range.")
-            return None
-    except ValueError:
-        print("\nPlease enter a valid category number.")
-        return None
-    
-    # === INPUT PRODUCT NAME ===
-    product_name = input("Product Name : ")
-
-    # === INPUT AMOUNT ===
-    try:
-        amount = float(input("Enter the amount : "))
-    except ValueError:
-        print("\nPlease enter a valid numeric amount. ")
-        return None
-    
-    # === Date ====
-    entry_date = datetime.now().strftime("%d-%m-%Y")
-
-    # === category ====
-    category = categories[category_index - 1]
-
-    # === DATA LIST === 
-    expense = {
-        "Date": [entry_date],
-        "Category": [category],
-        "Product":[product_name],
-        "Amount": [amount]
-        }
-
-    return expense
-
-# === MODULE FORE CREATE DATA SHEET ===
 def save_as_xl(expense):
     df = pd.DataFrame(expense)
-
-    excel_file = rf"D:\my projects\price_tracker\{file_name}.xlsx"
+    excel_file = f"{file_name}.xlsx"
+    
     try:
-        book = load_workbook(excel_file)
-        with pd.ExcelWriter(excel_file, engine="openpyxl", mode="a", if_sheet_exists="overlay") as writer:
-            df.to_excel(writer, index=False, header=False, startrow=book.active.max_row)
-    except PermissionError:
-        print("Permission denied: Close the Excel file before running this script.")
-    except FileNotFoundError:
-        df.to_excel(excel_file, index=False)
 
+        if not os.path.exists(excel_file):
+            df.to_excel(excel_file, index=False)
+            print(f"Created new expense file: {excel_file} ✅ ")
+            return
+        
+        with pd.ExcelWriter(excel_file, engine="openpyxl", mode="a", if_sheet_exists="overlay") as writer:
+            
+            book = writer.book
+            sheet = book.active
+            start_row = sheet.max_row
+            sheet_name = sheet.title 
+            
+            df.to_excel(writer, sheet_name=sheet_name, index=False, header=False, startrow=start_row)
+    except PermissionError:
+        print("❌ Permission denied: Please CLOSE the Excel file before running this script.")
+    except Exception as e:
+        print(f"❌ An unexpected error occurred during file saving: {e}")
