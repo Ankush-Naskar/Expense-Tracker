@@ -1,5 +1,5 @@
 import os
-from modules.comments import menu, total_menu, get_default_config_text
+from modules.comments import menu, get_default_config_text
 if not os.path.exists("user_settings.py"):
     with open("user_settings.py", "w") as f:
         f.write(get_default_config_text())
@@ -40,7 +40,6 @@ try:
 
             # =====  3. View Total Amount  =====
             case 3:
-                # total_menu()
                 input_for_total_amount()
 
             # =====  4. Exit  =====

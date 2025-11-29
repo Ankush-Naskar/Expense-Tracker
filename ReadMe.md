@@ -1,4 +1,5 @@
 # 📊 EXPENSE-TRACKER
+![POSTER](media/img4.png)
 ## 🧠 INTRODUCTION
 EXPENSE-TRACKER is a lightweight expense management tool built in Python. It helps users record daily spending, organize purchases by category, and automatically generate summaries—including daily, monthly, and yearly reports. Designed for speed and simplicity, it removes the need for spreadsheets or Excel skills, making expense tracking effortless and automated.
 
@@ -10,6 +11,8 @@ EXPENSE-TRACKER is a lightweight expense management tool built in Python. It hel
 4. [👤 USER SETTINGS](#-user-settings)
 5. [🔐 PRIVACY NOTICE](#-privacy-notice)
 6. [⚙️ INSTALLATION](#️-installation)
+7. [🚀 FUTURE PLANS](#future-plans)
+8. [👤 AUTHOR AND CONTACT](#-author-and-contact)
 
 ## 💡 HOW IT WORKS
 - The user selects a category, enters a product name and amount.
@@ -18,48 +21,33 @@ EXPENSE-TRACKER is a lightweight expense management tool built in Python. It hel
 - All inputs are validated to prevent crashes or incorrect entries.
 
 ## ✨ FEATURES
-### 🗃️ Add Expense
-- Creates `.xlsx` file automatically on first run  
-- Appends new expenses to the same file  
-- Keeps all records organized in one place
 
+### 🗃️ Smart Data Entry
+* **Auto-Creation:** Automatically creates the `expenses.xlsx` file on the first run.
+* **Batch Entry Mode:** Add multiple expenses in a row without returning to the main menu.
+* **Robust Validation:** Prevents crashes by checking user input (e.g., ensures amounts are numbers).
 
+### 📅 Intelligent Summaries
+View your financial health with powerful grouping algorithms:
+* **🌅 Today:** Quick snapshot of daily spending.
+* **📅 Daily:** Day by day expenses for last 365 days 
+* **🗓️ Weekly:** breakdown of expenses for the last 8 weeks.
+* **🈷️ Monthly:** Month-by-month trends for the 12 months.
+* **📅 Yearly:** High-level annual overview.
+
+### ⚙️ Auto-Configuration
+* **Self-Healing Settings:** Automatically generates a `user_settings.py` file if one is missing.
+* **Customizable:** Easily change category names or the target filename.
+### 📈 PIE CHART
+Generate a `pie-chart` to for better analysis.(UPCOMING) 
 ### 📅 Auto-date
 Every entry is automatically saved with the current date. Users cannot manually select or enter a custom date within EXPENSE-TRACKER. If needed, the date can be edited later directly from the generated `.xlsx` file. To avoid calculation errors in date-based summaries, the format must remain `DD-MM-YYYY`.
 
-### 📊 Summaries
-EXPENSE-TRACKER can generate clear spending summaries based on the user’s preference — including daily, weekly, monthly, and yearly expense reports. This helps users easily understand their spending patterns and manage their finances better.
+
 
 ## 📁 FILE STRUCTURE
-```
-📁 EXPENSE-TRACKER/ 
-├── 📄 main.py 
-|          Entry point for the program 
-|
-├── 📄 ReadMe.txt 
-|           Project documentation 
-|
-├── 📄 requirements.txt   
-|           Dependencies
-|
-├── 📄 user_settings.py  
-|           User-defined categories
-|
-├── 📁 modules/ 
-|  |
-│  ├── 📄 add_expense.py 
-|  |             Handles Excel saving
-|  |
-│  ├── 📄 input_function.py
-|  |              Handles input functions
-|  |
-│  ├── 📄 total_expense.py 
-|  |             Reporting functions (today, daily, weekly, monthly, yearly) 
-|  |
-└──└── 📄 comments.py 
-                Menu display functions 
 
-```
+![file structure](media/img3.png)
 
 
 ## 👤 USER SETTINGS
@@ -83,25 +71,36 @@ Make sure the file name matches exactly when switching between different expense
 All expense data is stored locally in a `.xlsx` file. Nothing is uploaded, synced, or shared online. Users are fully responsible for managing, securing, and backing up their own data.
 
 ## ⚙️ INSTALLATION
-Download and install [vs code](https://code.visualstudio.com/Download) and [python](https://www.python.org/ftp/python/3.14.0/python-3.14.0-amd64.exe) from your browser.  
-Open vs code and install python extension:
+### 🔧 TOOLS
+1. [git](https://git-scm.com/install/windows)  
+2. [vs code](https://code.visualstudio.com/Download)  
+3. [python](https://www.python.org/downloads/)  
+
+### 🎥 INSTALLATION VIDEO
+(COMING SOON)
+
+### 💻 CODES
+
 
 1. If user want to create a virtual environment:
 
-```python
+```bash
 pip install virtualenv          # Install virtualenv
 python -m venv env              # Create a virtual environment
 .\env\Scripts\activate.ps1      # Activate the environment (Windows PowerShell)
 pip install -r requirements.txt # Install required modules
 ```
 2. If user don't want to create environment  
- ```python
+ ```bash
 pip install -r requirements.txt # Install required modules
  ```
 
+## 🚀 FUTURE PLANS
+1. Add category wise analysis
+2. Add pie-chart for better understanding
 ## 👤 AUTHOR AND CONTACT
 ANKUSH NASKAR  
 STUDENT  
 📬 Email: ankush29607@gmail.com  
-🔗 [Linked](https://www.linkedin.com/in/ankush-naskar-4b135438b/)  
+🔗 [Linkedin](https://www.linkedin.com/in/ankush-naskar-4b135438b/)  
 🔗 [GitHub](https://github.com/Ankush-Naskar)
